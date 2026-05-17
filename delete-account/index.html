@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Deletion — Wallet Plan</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --accent: #4f46e5;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --danger-border: #fca5a5;
+      --warning-bg: #fffbeb;
+      --warning-border: #fcd34d;
+      --warning-text: #92400e;
+      --border: #e5e7eb;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      padding: 3rem 3.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 2rem 1.25rem;
+      }
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.5rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .meta span strong {
+      color: var(--text);
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 2.2rem 0 0.75rem;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.4rem 0 0.5rem;
+      color: var(--text);
+    }
+
+    p {
+      margin-bottom: 0.85rem;
+      font-size: 0.95rem;
+    }
+
+    ul {
+      margin: 0.5rem 0 0.85rem 1.4rem;
+      font-size: 0.95rem;
+    }
+
+    ul li {
+      margin-bottom: 0.3rem;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* Steps */
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      margin: 0.75rem 0 1rem;
+      padding: 0;
+    }
+
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.95rem;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      flex-shrink: 0;
+      width: 1.75rem;
+      height: 1.75rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 0.75rem 0 1rem;
+    }
+
+    th {
+      background: #f3f4f6;
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+
+    td {
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background: #fafafa;
+    }
+
+    /* Warning block */
+    .warning {
+      background: var(--warning-bg);
+      border-left: 4px solid var(--warning-border);
+      border-radius: 6px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.9rem;
+      color: var(--warning-text);
+      margin: 0.75rem 0;
+    }
+
+    /* Contact block */
+    .contact-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .contact-box p {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Account Deletion — Wallet Plan</h1>
+      <div class="meta">
+        <span><strong>App:</strong> Wallet Plan</span>
+        <span><strong>Developer:</strong> Serhii Havaleshko</span>
+        <span><strong>Support:</strong> <a href="mailto:walletplan.app@gmail.com">walletplan.app@gmail.com</a></span>
+      </div>
+    </header>
+
+    <h2>How to Delete Your Account</h2>
+    <p>You can delete your account directly inside the Wallet Plan app. No need to contact support — the deletion is immediate and permanent.</p>
+
+    <h3>Step-by-step instructions</h3>
+    <ol class="steps">
+      <li>Open <strong>Wallet Plan</strong> on your device.</li>
+      <li>Tap the <strong>Settings</strong> tab (bottom navigation bar).</li>
+      <li>Scroll to the very bottom of the Settings screen.</li>
+      <li>Tap <strong>"Delete Account"</strong>.</li>
+      <li>Read the warning message carefully.</li>
+      <li>Enter your <strong>current password</strong> to confirm your identity.</li>
+      <li>Tap <strong>"Delete"</strong> to permanently delete your account.</li>
+    </ol>
+    <p>Your account and all associated data will be deleted immediately.</p>
+
+    <hr />
+
+    <h2>What Data Is Deleted</h2>
+    <p>When you delete your account, the following data is <strong>permanently and immediately deleted</strong>:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Deleted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Your profile (name, email)</td><td>✅ Yes</td></tr>
+        <tr><td>Your authentication credentials</td><td>✅ Yes</td></tr>
+        <tr><td>All your personal financial accounts</td><td>✅ Yes</td></tr>
+        <tr><td>All your transactions</td><td>✅ Yes</td></tr>
+        <tr><td>Your app preferences and settings</td><td>✅ Yes</td></tr>
+      </tbody>
+    </table>
+
+    <h3>If you are the family owner</h3>
+    <p>If your account is the <strong>owner of a family group</strong>, deleting your account will also permanently delete:</p>
+    <ul>
+      <li>The entire family group</li>
+      <li>All shared accounts belonging to the family</li>
+      <li>All transactions of all family members</li>
+      <li>All categories created within the family</li>
+      <li>All active invite links</li>
+    </ul>
+    <div class="warning">
+      ⚠️ Other family members will lose access to all shared data. Their individual Wallet Plan accounts will remain active, but they will no longer have a family group.
+    </div>
+
+    <h3>If you are a family member (not the owner)</h3>
+    <p>If you belong to a family but are not the owner, deleting your account will:</p>
+    <ul>
+      <li>Remove you from the family group</li>
+      <li>Delete your personal profile and credentials</li>
+      <li>Leave the family and its shared data intact for other members</li>
+    </ul>
+
+    <hr />
+
+    <h2>What Data Is Retained</h2>
+    <p>After account deletion, <strong>no personal data is retained</strong> in our database.</p>
+    <p>The following may persist temporarily in third-party systems outside our direct control:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Data</th>
+          <th>Retention</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sentry (crash reporting)</td>
+          <td>Anonymized error logs linked to your user ID</td>
+          <td>Up to 90 days, then auto-deleted</td>
+        </tr>
+        <tr>
+          <td>Google Firebase backups</td>
+          <td>Encrypted database backups</td>
+          <td>Up to 30 days, then auto-deleted</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>We do not retain financial data, transaction history, or personal identifiers beyond the deletion date.</p>
+
+    <hr />
+
+    <h2>Partial Data Deletion (without deleting your account)</h2>
+    <p>You can delete specific data without deleting your account:</p>
+    <ul>
+      <li><strong>Delete individual transactions</strong> — tap any transaction and select Delete.</li>
+      <li><strong>Delete financial accounts</strong> — go to Accounts, open an account, and select Delete Account. This also deletes all transactions associated with that account.</li>
+      <li><strong>Leave a family group</strong> — go to Settings → Family → Leave Family. Your personal accounts and data remain intact.</li>
+      <li><strong>Delete custom categories</strong> — go to Settings → Categories and delete any custom category you created.</li>
+    </ul>
+
+    <hr />
+
+    <h2>Contact</h2>
+    <p>If you are unable to access the app or need assistance with account deletion, contact us:</p>
+    <div class="contact-box">
+      <p><strong>Email:</strong> <a href="mailto:walletplan.app@gmail.com">walletplan.app@gmail.com</a></p>
+      <p>We will process manual deletion requests within <strong>30 days</strong>.</p>
+    </div>
+
+    <footer>
+      Wallet Plan
+    </footer>
+  </div>
+</body>
+</html>
