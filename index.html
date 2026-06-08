@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wallet Plan — Personal Finance & Family Budget App</title>
+  <meta name="description" content="Wallet Plan is a personal finance tracker and family budget planner. Track expenses, monitor income, plan savings, and stay in control — alone or together." />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --accent: #4f46e5;
+      --accent-dark: #3730a3;
+      --accent-light: #eef2ff;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --surface: #ffffff;
+      --bg: #f7f8fa;
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo img {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #fff;
+      padding: 5rem 2rem 0;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 3rem;
+    }
+
+    .hero-text {
+      flex: 1;
+      padding-bottom: 4rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50px;
+      padding: 0.3rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      opacity: 0.88;
+      margin-bottom: 2.25rem;
+      max-width: 440px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-screenshots {
+      display: flex;
+      align-items: flex-end;
+      gap: -1rem;
+      flex-shrink: 0;
+    }
+
+    .hero-screenshots img {
+      width: 180px;
+      border-radius: 22px 22px 0 0;
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.25);
+      display: block;
+    }
+
+    .hero-screenshots img:nth-child(2) {
+      width: 200px;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-screenshots img:nth-child(1),
+    .hero-screenshots img:nth-child(3) {
+      opacity: 0.75;
+      margin-bottom: -30px;
+    }
+
+    @media (max-width: 720px) {
+      .hero-inner { flex-direction: column; align-items: center; }
+      .hero-text { padding-bottom: 2rem; text-align: center; }
+      .hero-text p { margin: 0 auto 2rem; }
+      .hero-buttons { justify-content: center; }
+      .hero-screenshots img { width: 130px; }
+      .hero-screenshots img:nth-child(2) { width: 150px; }
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: opacity 0.15s, transform 0.15s;
+      text-decoration: none;
+    }
+
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); text-decoration: none; }
+    .btn-primary { background: #fff; color: var(--accent); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5); }
+    .btn-white { background: #fff; color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--surface); }
+
+    .section-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 6px 24px rgba(79,70,229,0.1);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon { font-size: 1.8rem; margin-bottom: 0.75rem; line-height: 1; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── SCREENSHOTS STRIP ── */
+    .screenshots-section {
+      background: #0f0e1a;
+      padding: 5rem 2rem;
+      overflow: hidden;
+    }
+
+    .screenshots-section .section-label { color: #a5b4fc; }
+    .screenshots-section .section-title { color: #fff; }
+    .screenshots-section .section-sub { color: rgba(255,255,255,0.55); }
+
+    .screenshots-strip {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.15) transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .screenshots-strip::-webkit-scrollbar { height: 6px; }
+    .screenshots-strip::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+    .screenshots-strip img {
+      flex-shrink: 0;
+      width: 220px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      display: block;
+    }
+
+    /* ── HIGHLIGHT ROWS ── */
+    .highlight {
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .highlight:last-child { margin-bottom: 0; }
+    .highlight.reverse { flex-direction: row-reverse; }
+
+    .highlight-visual {
+      flex-shrink: 0;
+      width: 220px;
+    }
+
+    .highlight-visual img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(79,70,229,0.15);
+    }
+
+    .highlight-visual-emoji {
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, var(--accent-light), #ede9fe);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      flex-shrink: 0;
+    }
+
+    .highlight-text h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    .highlight-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 660px) {
+      .highlight, .highlight.reverse { flex-direction: column; }
+      .highlight-visual { width: 100%; }
+      .highlight-visual-emoji { width: 100%; height: 140px; }
+    }
+
+    /* ── LANGUAGES ── */
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border-radius: 50px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.83rem;
+      font-weight: 600;
+    }
+
+    /* ── PREMIUM ── */
+    .premium-section {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #fff;
+    }
+
+    .premium-section .section-label { color: rgba(255,255,255,0.65); }
+    .premium-section .section-title { color: #fff; }
+    .premium-section .section-sub { color: rgba(255,255,255,0.75); }
+
+    .premium-list {
+      list-style: none;
+      margin: 0 0 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .premium-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .premium-list li::before {
+      content: "✓";
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* ── DOWNLOAD ── */
+    .store-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: #d1d5db;
+      color: #9ca3af;
+      padding: 0.7rem 1.4rem;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: not-allowed;
+      position: relative;
+    }
+
+    .store-btn:hover { opacity: 1; transform: none; text-decoration: none; color: #9ca3af; }
+    .store-btn .store-icon { font-size: 1.4rem; line-height: 1; display: flex; align-items: center; }
+
+    .store-btn .store-label {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .store-btn .store-label small { font-size: 0.7rem; font-weight: 400; opacity: 0.8; }
+
+    .store-btn .coming-soon-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 50px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.83rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a { color: rgba(255,255,255,0.5); }
+    .footer-links a:hover { color: #fff; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo" style="text-decoration:none;color:inherit;">
+      <img src="assets/images/app-icon.png" alt="Wallet Plan icon" />
+      Wallet Plan
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#family">Family</a>
+      <a href="#premium">Premium</a>
+      <a href="#download">Download</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">Personal Finance App</div>
+        <h1>Manage Money Smarter<br/>Alone or Together</h1>
+        <p>Track expenses, monitor income, plan savings, and share budgets with your family — all in one simple and secure app.</p>
+        <div class="hero-buttons">
+          <a href="#download" class="btn btn-primary">↓ Get the App</a>
+          <a href="#features" class="btn btn-outline">See Features</a>
+        </div>
+      </div>
+      <div class="hero-screenshots">
+        <img src="assets/images/screenshot-1.png" alt="Wallet Plan screen" />
+        <img src="assets/images/screenshot-0.png" alt="Wallet Plan home screen" />
+        <img src="assets/images/screenshot-2.png" alt="Wallet Plan screen" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section section-alt" id="features">
+    <div class="section-inner">
+      <div class="section-label">Everything you need</div>
+      <h2 class="section-title">Built for real personal finance</h2>
+      <p class="section-sub">From daily spending to long-term savings goals — Wallet Plan covers it all.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Accounts & Balances</h3>
+          <p>Create multiple accounts — cash, cards, savings, or custom wallets. Track real-time balances and set savings goals.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Expense & Income Tracker</h3>
+          <p>Add expenses, income, transfers, and debts. Organize with categories, notes, and dates — full history always at hand.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Analytics & Reports</h3>
+          <p>Monthly overviews, month-over-month comparison, top categories, spending trends, and net balance progress.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💱</div>
+          <h3>Multi-Currency</h3>
+          <p>Use different currencies across accounts with automatic live exchange rates. Great for travel and international families.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Security & Privacy</h3>
+          <p>PIN code and biometric lock (Face ID, Touch ID). Secure cloud sync via Firebase. Personal accounts stay private always.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Custom Themes</h3>
+          <p>Choose light mode, dark mode, or follow the system theme. Your app, your look.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section class="screenshots-section" id="screenshots">
+    <div class="section-inner">
+      <div class="section-label">See it in action</div>
+      <h2 class="section-title">Clean, intuitive design</h2>
+      <p class="section-sub">Everything you need is right where you expect it.</p>
+    </div>
+    <div class="screenshots-strip" style="max-width:1000px; margin: 0 auto;">
+      <img src="assets/images/screenshot-0.png" alt="Home screen" />
+      <img src="assets/images/screenshot-1.png" alt="Transactions" />
+      <img src="assets/images/screenshot-2.png" alt="Analytics" />
+      <img src="assets/images/screenshot-3.png" alt="Accounts" />
+      <img src="assets/images/screenshot-4.png" alt="Settings" />
+    </div>
+  </section>
+
+  <!-- FAMILY -->
+  <section class="section section-alt" id="family">
+    <div class="section-inner">
+      <div class="section-label">Better together</div>
+      <h2 class="section-title">Family Budget & Shared Accounts</h2>
+      <p class="section-sub">Plan finances together without giving up your personal privacy.</p>
+
+      <div class="highlight">
+        <div class="highlight-visual">
+          <img src="assets/images/screenshot-3.png" alt="Family accounts" />
+        </div>
+        <div class="highlight-text">
+          <h3>Create a family group in seconds</h3>
+          <p>Invite family members with a simple 6-character code. Share selected accounts, track household expenses together, and always see the full picture of your family's finances.</p>
+        </div>
+      </div>
+
+      <div class="highlight reverse">
+        <div class="highlight-visual-emoji">🔐</div>
+        <div class="highlight-text">
+          <h3>Personal accounts stay yours</h3>
+          <p>Inside a family group, you decide what to share. Personal accounts are visible only to you — no one else in your family can see them, ever.</p>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <div class="highlight-visual">
+          <img src="assets/images/screenshot-2.png" alt="Analytics" />
+        </div>
+        <div class="highlight-text">
+          <h3>Analytics for the whole family</h3>
+          <p>Track shared spending trends, top categories, and monthly progress. Always know where the family budget stands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Global reach</div>
+      <h2 class="section-title">Available in 8 languages</h2>
+      <p class="section-sub">Use Wallet Plan in your native language, no matter where you are.</p>
+      <div class="tags-row">
+        <span class="tag">🇬🇧 English</span>
+        <span class="tag">🇷🇺 Russian</span>
+        <span class="tag">🇺🇦 Ukrainian</span>
+        <span class="tag">🇪🇸 Spanish</span>
+        <span class="tag">🇫🇷 French</span>
+        <span class="tag">🇩🇪 German</span>
+        <span class="tag">🇨🇳 Chinese</span>
+        <span class="tag">🇸🇦 Arabic</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM -->
+  <section class="section premium-section" id="premium">
+    <div class="section-inner">
+      <div class="section-label">Premium</div>
+      <h2 class="section-title">Unlock the full experience</h2>
+      <p class="section-sub">Go Premium to access powerful family budgeting features. Cancel anytime in your store settings.</p>
+
+      <ul class="premium-list">
+        <li>Family group invitations</li>
+        <li>Unlimited family members</li>
+        <li>Advanced shared budgeting features</li>
+        <li>Priority support</li>
+      </ul>
+
+      <a href="#download" class="btn btn-white">Get Premium →</a>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section class="section section-alt" id="download">
+    <div class="section-inner">
+      <div class="section-label">Get started</div>
+      <h2 class="section-title">Download Wallet Plan</h2>
+      <p class="section-sub">Free to download on iOS and Android. Your data belongs to you — delete your account anytime directly in app settings.</p>
+
+      <div class="store-buttons">
+        <span class="store-btn">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <span class="store-icon">
+            <svg width="24" height="24" viewBox="0 0 814 1000" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-127.4C46 790.7 0 663 0 541.8c0-207.3 134.4-317 266.5-317 100.9 0 184.4 66.4 244.8 66.4 56.9 0 151.9-70.5 264.9-70.5zm-81.9-122.9c43-50.3 72.6-119.4 72.6-188.5 0-9.7-.7-19.4-2.1-28.4-68.7 2.6-150.6 45.7-199.7 100.9-38.9 43.7-76 114.1-76 184.5 0 10.4 1.9 20.7 2.6 24 4.5.6 11.7 1.3 18.9 1.3 61.6 0 139.1-41.4 183.7-93.8z"/>
+            </svg>
+          </span>
+          <span class="store-label">
+            <small>Download on the</small>
+            App Store
+          </span>
+        </span>
+        <span class="store-btn">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <span class="store-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.18 23.76c.3.17.63.24.96.21l.1-.06L13.64 14 10 10.37 3.18 23.76z" fill="#EA4335"/>
+              <path d="M20.5 10.56l-2.68-1.53-3.19 2.84 3.2 3.2 2.67-1.53a1.52 1.52 0 0 0 0-2.98z" fill="#FBBC04"/>
+              <path d="M3.14.28A1.5 1.5 0 0 0 2.5 1.5v21a1.5 1.5 0 0 0 .68 1.26L14.15 12 3.14.28z" fill="#4285F4"/>
+              <path d="M14.15 12 10 7.87 3.24.1c.3-.08.64-.05.95.13L20.5 10.56 14.15 12z" fill="#34A853"/>
+            </svg>
+          </span>
+          <span class="store-label">
+            <small>Get it on</small>
+            Google Play
+          </span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/delete-account/">Delete Account</a>
+      <a href="mailto:walletplan.app@gmail.com">walletplan.app@gmail.com</a>
+    </div>
+    <p>© 2026 Wallet Plan</p>
+  </footer>
+
+</body>
+</html>
