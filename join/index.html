@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Family — Wallet Plan</title>
+  <link rel="icon" type="image/png" href="/assets/images/app-icon.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #4f46e5;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+      margin: 0 auto 1.25rem;
+      display: block;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .code-badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: var(--accent);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      margin: 0.75rem 0 1.5rem;
+      font-family: monospace;
+    }
+
+    .code-badge:empty { display: none; }
+
+    .status {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #e5e7eb;
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--text);
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .store-btn:hover { opacity: 0.85; transform: translateY(-1px); text-decoration: none; color: #fff; }
+
+    .store-btn .store-icon { display: flex; align-items: center; flex-shrink: 0; }
+
+    .store-btn .store-label {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+      text-align: left;
+    }
+
+    .store-btn .store-label small { font-size: 0.7rem; font-weight: 400; opacity: 0.7; }
+
+    .back-link {
+      display: block;
+      margin-top: 1.5rem;
+      font-size: 0.83rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="/assets/images/app-icon.png" alt="Wallet Plan" class="app-icon" />
+    <h1>Join Family Group</h1>
+    <p class="subtitle">You've been invited to a family in Wallet Plan</p>
+    <div class="code-badge" id="code-display"></div>
+
+    <p class="status" id="status">
+      <span class="spinner"></span>
+      Opening Wallet Plan…
+    </p>
+
+    <div class="divider"><span>App not installed? Download it</span></div>
+
+    <div class="store-buttons">
+      <span class="store-btn" id="ios-btn" style="background:#d1d5db; color:#9ca3af; cursor:not-allowed; position:relative;">
+        <span style="position:absolute;top:-10px;right:-10px;background:#4f46e5;color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:0.2rem 0.5rem;border-radius:50px;">Coming Soon</span>
+        <span class="store-icon">
+          <svg width="22" height="22" viewBox="0 0 814 1000" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-37.5-155.5-127.4C46 790.7 0 663 0 541.8c0-207.3 134.4-317 266.5-317 100.9 0 184.4 66.4 244.8 66.4 56.9 0 151.9-70.5 264.9-70.5zm-81.9-122.9c43-50.3 72.6-119.4 72.6-188.5 0-9.7-.7-19.4-2.1-28.4-68.7 2.6-150.6 45.7-199.7 100.9-38.9 43.7-76 114.1-76 184.5 0 10.4 1.9 20.7 2.6 24 4.5.6 11.7 1.3 18.9 1.3 61.6 0 139.1-41.4 183.7-93.8z"/>
+          </svg>
+        </span>
+        <span class="store-label">
+          <small>Download on the</small>
+          App Store
+        </span>
+      </span>
+      <a href="https://play.google.com/store/apps/details?id=com.walletplan.app" class="store-btn">
+        <span class="store-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.18 23.76c.3.17.63.24.96.21l.1-.06L13.64 14 10 10.37 3.18 23.76z" fill="#EA4335"/>
+            <path d="M20.5 10.56l-2.68-1.53-3.19 2.84 3.2 3.2 2.67-1.53a1.52 1.52 0 0 0 0-2.98z" fill="#FBBC04"/>
+            <path d="M3.14.28A1.5 1.5 0 0 0 2.5 1.5v21a1.5 1.5 0 0 0 .68 1.26L14.15 12 3.14.28z" fill="#4285F4"/>
+            <path d="M14.15 12 10 7.87 3.24.1c.3-.08.64-.05.95.13L20.5 10.56 14.15 12z" fill="#34A853"/>
+          </svg>
+        </span>
+        <span class="store-label">
+          <small>Get it on</small>
+          Google Play
+        </span>
+      </a>
+    </div>
+
+    <a href="/" class="back-link">← Back to Wallet Plan</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+
+    // Show invite code if present
+    const codeDisplay = document.getElementById('code-display');
+    if (code) {
+      codeDisplay.textContent = code;
+    }
+
+    // Try to open the app via custom scheme
+    if (code) {
+      window.location = 'moneybudget://join?code=' + encodeURIComponent(code);
+    }
+
+    // After 2.5s assume app isn't installed — update status and highlight store buttons
+    setTimeout(() => {
+      const status = document.getElementById('status');
+      status.innerHTML = 'Install Wallet Plan to join the family group.';
+    }, 2500);
+  </script>
+</body>
+</html>
