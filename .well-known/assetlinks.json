@@ -1,11 +1,14 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.walletplan.app",
       "sha256_cert_fingerprints": [
-        "7E:EE:92:A8:2B:CA:76:A5:69:8C:8E:88:42:F5:20:08:B2:B3:C7:BB:A9:0C:D8:BF:36:64:DD:49:20:40:EB:C7"
+        "D9:65:AE:9D:88:A5:BF:A2:9B:10:AD:8F:ED:4B:C0:F8:AA:AD:B3:3F:F1:C0:74:85:E9:3D:34:34:98:46:0B:CD"
       ]
     }
   }
