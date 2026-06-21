@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="/assets/images/app-icon.png" />
   <link rel="apple-touch-icon" href="/assets/images/app-icon.png" />
-  <title>Wallet Plan — Personal Finance & Family Budget App</title>
-  <meta name="description" content="Wallet Plan is a personal finance tracker and family budget planner. Track expenses, monitor income, plan savings, and stay in control — alone or together." />
+  <title>Wallet Plan: Family Budget</title>
+  <meta name="description" content="Track expenses, crypto, budgets, and family finances in one app." />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -73,10 +73,30 @@
       display: flex;
       gap: 1.5rem;
       font-size: 0.875rem;
+      flex-wrap: wrap;
     }
 
     .nav-links a { color: var(--muted); }
     .nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      nav {
+        height: auto;
+        padding: 0.85rem 1rem;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .nav-logo {
+        font-size: 1rem;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 0.6rem 1rem;
+        font-size: 0.82rem;
+      }
+    }
 
     /* ── HERO ── */
     .hero {
@@ -472,9 +492,9 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-text">
-        <div class="hero-badge">Personal Finance App</div>
+        <div class="hero-badge">Family Budget & Finance</div>
         <h1>Manage Money Smarter<br/>Alone or Together</h1>
-        <p>Track expenses, monitor income, plan savings, and share budgets with your family — all in one simple and secure app.</p>
+        <p>Track expenses, monitor income, manage accounts, follow crypto balances, and share budgets with your family in one simple app.</p>
         <div class="hero-buttons">
           <a href="#download" class="btn btn-primary">↓ Get the App</a>
           <a href="#features" class="btn btn-outline">See Features</a>
@@ -493,33 +513,43 @@
     <div class="section-inner">
       <div class="section-label">Everything you need</div>
       <h2 class="section-title">Built for real personal finance</h2>
-      <p class="section-sub">From daily spending to long-term savings goals — Wallet Plan covers it all.</p>
+      <p class="section-sub">From daily spending and debts to crypto tracking, recurring payments, and long-term savings goals.</p>
 
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">💰</div>
           <h3>Accounts & Balances</h3>
-          <p>Create multiple accounts — cash, cards, savings, or custom wallets. Track real-time balances and set savings goals.</p>
+          <p>Create multiple accounts for cash, cards, crypto, and savings. Track balances in real time and monitor savings goals.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📊</div>
           <h3>Expense & Income Tracker</h3>
-          <p>Add expenses, income, transfers, and debts. Organize with categories, notes, and dates — full history always at hand.</p>
+          <p>Add expenses, income, transfers, and debts. Organize everything with categories, notes, dates, and a complete history.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📈</div>
           <h3>Analytics & Reports</h3>
-          <p>Monthly overviews, month-over-month comparison, top categories, spending trends, and net balance progress.</p>
+          <p>See income, expenses, savings, cash flow, top categories, and trends. Compare current results with previous periods.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">₿</div>
+          <h3>Crypto Tracking</h3>
+          <p>Track crypto accounts alongside cash, cards, and savings with converted balances in your default currency.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">💱</div>
           <h3>Multi-Currency</h3>
-          <p>Use different currencies across accounts with automatic live exchange rates. Great for travel and international families.</p>
+          <p>Use different currencies across accounts with automatic live fiat and crypto exchange rates. Great for travel and expat life.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔁</div>
+          <h3>Recurring Payments</h3>
+          <p>Create recurring income and expense transactions, manage subscriptions, and auto-post or confirm future payments.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🔒</div>
           <h3>Security & Privacy</h3>
-          <p>PIN code and biometric lock (Face ID, Touch ID). Secure cloud sync via Firebase. Personal accounts stay private always.</p>
+          <p>PIN code and biometric lock, secure cloud sync via Google Firebase, and private personal accounts even inside family groups.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🎨</div>
@@ -551,7 +581,7 @@
     <div class="section-inner">
       <div class="section-label">Better together</div>
       <h2 class="section-title">Family Budget & Shared Accounts</h2>
-      <p class="section-sub">Plan finances together without giving up your personal privacy.</p>
+      <p class="section-sub">Share selected accounts, track household spending together, and keep personal money private.</p>
 
       <div class="highlight">
         <div class="highlight-visual">
@@ -577,7 +607,7 @@
         </div>
         <div class="highlight-text">
           <h3>Analytics for the whole family</h3>
-          <p>Track shared spending trends, top categories, and monthly progress. Always know where the family budget stands.</p>
+          <p>Track shared spending trends, top categories, income sources, and monthly progress. Always know where the family budget stands.</p>
         </div>
       </div>
     </div>
@@ -607,13 +637,14 @@
     <div class="section-inner">
       <div class="section-label">Premium</div>
       <h2 class="section-title">Unlock the full experience</h2>
-      <p class="section-sub">Go Premium to access powerful family budgeting features. Cancel anytime in your store settings.</p>
+      <p class="section-sub">Unlock family invitations, more account capacity, advanced analytics, recurring payments, custom categories, and more. Cancel anytime in Google Play settings.</p>
 
       <ul class="premium-list">
         <li>Family group invitations</li>
-        <li>Unlimited family members</li>
-        <li>Advanced shared budgeting features</li>
-        <li>Priority support</li>
+        <li>More account capacity, including extra savings accounts</li>
+        <li>Advanced analytics</li>
+        <li>Recurring payments and subscriptions</li>
+        <li>Custom categories and additional premium tools</li>
       </ul>
 
       <a href="#download" class="btn btn-white">Get Premium →</a>
@@ -625,7 +656,7 @@
     <div class="section-inner">
       <div class="section-label">Get started</div>
       <h2 class="section-title">Download Wallet Plan</h2>
-      <p class="section-sub">Free to download on iOS and Android. Your data belongs to you — delete your account anytime directly in app settings.</p>
+      <p class="section-sub">Download on Android today. Your data belongs to you, and you can delete your account and associated data anytime directly in app settings.</p>
 
       <div class="store-buttons">
         <span class="store-btn" style="background:#d1d5db; color:#9ca3af; cursor:not-allowed; position:relative;">
@@ -640,8 +671,7 @@
             App Store
           </span>
         </span>
-        <span class="store-btn">
-          <span class="coming-soon-badge">Coming Soon</span>
+        <a href="https://play.google.com/store/apps/details?id=com.walletplan.app" class="btn" style="background:#1a1a2e;color:#fff;">
           <span class="store-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.18 23.76c.3.17.63.24.96.21l.1-.06L13.64 14 10 10.37 3.18 23.76z" fill="#EA4335"/>
@@ -654,7 +684,7 @@
             <small>Get it on</small>
             Google Play
           </span>
-        </span>
+        </a>
       </div>
     </div>
   </section>
