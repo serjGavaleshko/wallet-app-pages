@@ -163,7 +163,6 @@
     .hero-screenshots img {
       width: 180px;
       border-radius: 22px 22px 0 0;
-      box-shadow: 0 -8px 40px rgba(0,0,0,0.25);
       display: block;
     }
 
@@ -275,8 +274,7 @@
     .screenshots-section .section-sub { color: rgba(255,255,255,0.55); }
 
     .screenshots-strip {
-      display: flex;
-      gap: 1.25rem;
+      position: relative;
       overflow-x: auto;
       padding-bottom: 1rem;
       scrollbar-width: thin;
@@ -284,15 +282,42 @@
       -webkit-overflow-scrolling: touch;
     }
 
+    .screenshots-track {
+      display: flex;
+      width: max-content;
+      gap: 1.25rem;
+      animation: screenshots-marquee 56s linear infinite;
+    }
+
     .screenshots-strip::-webkit-scrollbar { height: 6px; }
     .screenshots-strip::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
 
-    .screenshots-strip img {
+    .screenshots-track img {
       flex-shrink: 0;
       width: 220px;
       border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
       display: block;
+    }
+
+    .screenshots-strip:hover .screenshots-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes screenshots-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-50% - 0.625rem)); }
+    }
+
+    @media (max-width: 720px) {
+      .screenshots-track {
+        animation: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .screenshots-track {
+        animation: none;
+      }
     }
 
     /* ── HIGHLIGHT ROWS ── */
@@ -314,7 +339,6 @@
     .highlight-visual img {
       width: 100%;
       border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(79,70,229,0.15);
     }
 
     .highlight-visual-emoji {
@@ -415,6 +439,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.65rem;
+      justify-content: center;
       background: #d1d5db;
       color: #9ca3af;
       padding: 0.7rem 1.4rem;
@@ -423,15 +448,24 @@
       font-weight: 600;
       cursor: not-allowed;
       position: relative;
+      min-width: 210px;
     }
 
     .store-btn:hover { opacity: 1; transform: none; text-decoration: none; color: #9ca3af; }
-    .store-btn .store-icon { font-size: 1.4rem; line-height: 1; display: flex; align-items: center; }
+    .store-btn .store-icon { line-height: 1; display: flex; align-items: center; flex-shrink: 0; }
+
+    .store-btn .store-icon img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      display: block;
+    }
 
     .store-btn .store-label {
       display: flex;
       flex-direction: column;
       line-height: 1.25;
+      min-width: 110px;
     }
 
     .store-btn .store-label small { font-size: 0.7rem; font-weight: 400; opacity: 0.8; }
@@ -501,9 +535,9 @@
         </div>
       </div>
       <div class="hero-screenshots">
-        <img src="assets/images/screenshot-1.png" alt="Wallet Plan screen" />
-        <img src="assets/images/screenshot-0.png" alt="Wallet Plan home screen" />
-        <img src="assets/images/screenshot-2.png" alt="Wallet Plan screen" />
+        <img src="assets/new-screenshots/WalletPlan_Transactions.png" alt="Wallet Plan transactions screen" />
+        <img src="assets/new-screenshots/WalletPlan_Analytics_1.png" alt="Wallet Plan analytics screen" />
+        <img src="assets/new-screenshots/WalletPlan_Accounts.png" alt="Wallet Plan accounts screen" />
       </div>
     </div>
   </section>
@@ -568,11 +602,22 @@
       <p class="section-sub">Everything you need is right where you expect it.</p>
     </div>
     <div class="screenshots-strip" style="max-width:1000px; margin: 0 auto;">
-      <img src="assets/images/screenshot-0.png" alt="Home screen" />
-      <img src="assets/images/screenshot-1.png" alt="Transactions" />
-      <img src="assets/images/screenshot-2.png" alt="Analytics" />
-      <img src="assets/images/screenshot-3.png" alt="Accounts" />
-      <img src="assets/images/screenshot-4.png" alt="Settings" />
+      <div class="screenshots-track">
+        <img src="assets/new-screenshots/WalletPlan_Transactions.png" alt="Transactions" />
+        <img src="assets/new-screenshots/WalletPlan_Analytics_1.png" alt="Analytics overview" />
+        <img src="assets/new-screenshots/WalletPlan_Analytics_2.png" alt="Analytics details" />
+        <img src="assets/new-screenshots/WalletPlan_Accounts.png" alt="Accounts" />
+        <img src="assets/new-screenshots/WalletPlan_New_Account.png" alt="New account" />
+        <img src="assets/new-screenshots/WalletPlan_New_transaction.png" alt="New transaction" />
+        <img src="assets/new-screenshots/WalletPlan_Subscriptions.png" alt="Subscriptions" />
+        <img src="assets/new-screenshots/WalletPlan_Transactions.png" alt="" aria-hidden="true" />
+        <img src="assets/new-screenshots/WalletPlan_Analytics_1.png" alt="" aria-hidden="true" />
+        <img src="assets/new-screenshots/WalletPlan_Analytics_2.png" alt="" aria-hidden="true" />
+        <img src="assets/new-screenshots/WalletPlan_Accounts.png" alt="" aria-hidden="true" />
+        <img src="assets/new-screenshots/WalletPlan_New_Account.png" alt="" aria-hidden="true" />
+        <img src="assets/new-screenshots/WalletPlan_New_transaction.png" alt="" aria-hidden="true" />
+        <img src="assets/new-screenshots/WalletPlan_Subscriptions.png" alt="" aria-hidden="true" />
+      </div>
     </div>
   </section>
 
@@ -585,7 +630,7 @@
 
       <div class="highlight">
         <div class="highlight-visual">
-          <img src="assets/images/screenshot-3.png" alt="Family accounts" />
+          <img src="assets/new-screenshots/WalletPlan_Accounts.png" alt="Family accounts" />
         </div>
         <div class="highlight-text">
           <h3>Create a family group in seconds</h3>
@@ -594,7 +639,9 @@
       </div>
 
       <div class="highlight reverse">
-        <div class="highlight-visual-emoji">🔐</div>
+        <div class="highlight-visual">
+          <img src="assets/new-screenshots/WalletPlan_New_Account.png" alt="New account" />
+        </div>
         <div class="highlight-text">
           <h3>Personal accounts stay yours</h3>
           <p>Inside a family group, you decide what to share. Personal accounts are visible only to you — no one else in your family can see them, ever.</p>
@@ -603,7 +650,7 @@
 
       <div class="highlight">
         <div class="highlight-visual">
-          <img src="assets/images/screenshot-2.png" alt="Analytics" />
+          <img src="assets/new-screenshots/WalletPlan_Analytics_2.png" alt="Analytics" />
         </div>
         <div class="highlight-text">
           <h3>Analytics for the whole family</h3>
